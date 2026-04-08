@@ -6,7 +6,7 @@
 
 A modern, real-time campus resource management platform built with Next.js 16, React 19, and Tailwind CSS. UniSync gives students, faculty, and administrators a unified dashboard to monitor and manage university resources — from water coolers and library seats to playgrounds and health rooms.
 
-[Live Demo](https://uni-sync-frontend.vercel.app) · [Report Bug](/report) · [Request Feature](https://github.com/your-username/uni-sync-frontend/issues)
+[Live Demo](https://uni-sync-frontend-wheat.vercel.app/) · [Report Bug](/report) · [Request Feature](https://github.com/vmanvs/uni-sync-frontend/issues)
 
 </div>
 
