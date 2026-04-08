@@ -1,7 +1,7 @@
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import SectionLabel from "@/components/ui/SectionLabel";
-import ResourceCard from "@/components/dashboard/ResourceCard";
+import CardCarousel from "@/components/dashboard/CardCarousel";
 import ReservationsTable from "@/components/dashboard/ReservationsTable";
 import { frequentlyViewedCards, upcomingReservations } from "@/lib/mockData";
 
@@ -21,19 +21,8 @@ export default function DashboardPage() {
           {/* Frequently Viewed Section */}
           <SectionLabel>Frequently Viewed</SectionLabel>
 
-          <div className="flex gap-8 mt-6 overflow-x-auto pb-4">
-            {frequentlyViewedCards.map((card) => (
-              <ResourceCard
-                key={card.id}
-                resourceName={card.resourceName}
-                icon={card.icon}
-                statusLabel={card.statusLabel}
-                statusCount={card.statusCount}
-                totalCount={card.totalCount}
-                href={card.href}
-                variant={card.variant}
-              />
-            ))}
+          <div className="mt-6 mb-4">
+            <CardCarousel cards={frequentlyViewedCards} />
           </div>
 
           {/* Tagline */}

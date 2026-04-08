@@ -21,16 +21,6 @@ export interface ReservationRow {
 
 export const frequentlyViewedCards: ResourceCardData[] = [
   {
-    id: "auditoriums",
-    resourceName: "Auditoriums",
-    icon: "/icons/audi-icon.svg",
-    statusLabel: "FREE",
-    statusCount: 2,
-    totalCount: 4,
-    href: "/auditoriums",
-    variant: "default",
-  },
-  {
     id: "water-coolers",
     resourceName: "Water Coolers",
     icon: "/icons/cooler-icon.svg",
@@ -39,6 +29,16 @@ export const frequentlyViewedCards: ResourceCardData[] = [
     totalCount: 32,
     href: "/coolers",
     variant: "featured",
+  },
+  {
+    id: "library",
+    resourceName: "Library",
+    icon: "/icons/library-icon.svg",
+    statusLabel: "SEATS FREE",
+    statusCount: 236,
+    totalCount: 250,
+    href: "/library",
+    variant: "default",
   },
   {
     id: "health-rooms",
@@ -109,7 +109,6 @@ export const libraryBuildings: LibraryBuilding[] = [
 ];
 
 // Sitting chart: 7 rows x 8 columns. true = available (black), false = occupied (red)
-// Based on the design, column 5 (index 5) is occupied in every row
 export const sittingChartData: boolean[][] = [
   [true, true, true, true, true, false, true, true],
   [true, true, true, true, true, false, true, true],
@@ -151,7 +150,6 @@ export interface CoolerInfoRow {
   lastCleaned: string;
 }
 
-// Cooler data per building per floor
 export const coolerInfoData: Record<string, Record<string, CoolerInfoRow[]>> = {
   ab1: {
     ground: [
@@ -191,3 +189,21 @@ export const coolerInfoData: Record<string, Record<string, CoolerInfoRow[]>> = {
     ],
   },
 };
+
+/* ─── Health Room ─── */
+
+export interface HealthRoomRow {
+  location: string;
+  doctorName: string;
+  sittingTime: string;
+  status: "available" | "busy" | "closed";
+  specialization: string;
+}
+
+export const healthRoomData: HealthRoomRow[] = [
+  { location: "GH-1", doctorName: "Dr. Meera Kapoor", sittingTime: "9 AM to 12 PM", status: "available", specialization: "General Physician" },
+  { location: "GH-2", doctorName: "Dr. Rajesh Nair", sittingTime: "3 PM to 6 PM", status: "available", specialization: "General Physician" },
+  { location: "BH-1", doctorName: "Dr. Anita Sharma", sittingTime: "10 AM to 1 PM", status: "busy", specialization: "Orthopedic" },
+  { location: "BH-2", doctorName: "Dr. Vikram Sinha", sittingTime: "2 PM to 5 PM", status: "available", specialization: "Dermatologist" },
+  { location: "BH-3", doctorName: "Dr. Priya Iyer", sittingTime: "3 PM to 6 PM", status: "closed", specialization: "ENT Specialist" },
+];
