@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root {
+  /* Backgrounds */
+  --bg-page: #F5F7FA;
+  --bg-white: #FFFFFF;
+
+  /* Text */
+  --text-heading: #343C6A;
+  --text-body: #232323;
+  --text-muted: #B1B1B1;
+  --text-table-header: #718EBF;
+
+  /* Accent */
+  --accent-blue: #2D60FF;
+
+  /* Card gradient */
+  --card-gradient-start: #4C49ED;
+  --card-gradient-end: #0A06F4;
+
+  /* Brand gradient */
+  --brand-gradient-start: #1433F3;
+  --brand-gradient-end: #0C1D8D;
+
+  /* Dividers */
+  --divider: #E6EFF5;
+  --divider-light: #F2F4F7;
+
+  /* Tagline colors */
+  --tag-management: #D4A017;
+  --tag-students: #E74C3C;
+
+  /* Notification */
+  --notification-bg: #F5F7FA;
+}
+
+@theme inline {
+  --color-bg-page: var(--bg-page);
+  --color-bg-white: var(--bg-white);
+  --color-text-heading: var(--text-heading);
+  --color-text-body: var(--text-body);
+  --color-text-muted: var(--text-muted);
+  --color-text-table-header: var(--text-table-header);
+  --color-accent-blue: var(--accent-blue);
+  --color-divider: var(--divider);
+  --color-divider-light: var(--divider-light);
+  --color-tag-management: var(--tag-management);
+  --color-tag-students: var(--tag-students);
+  --color-notification-bg: var(--notification-bg);
+  --font-sans: var(--font-inter);
+  --font-lato: var(--font-lato);
+  --font-open-sans-hebrew: var(--font-open-sans-hebrew);
+  --font-mukta-malar: var(--font-mukta-malar);
+}
+
+body {
+  background: var(--bg-white);
+  color: var(--text-body);
+  font-family: var(--font-inter), sans-serif;
+}
+
+/* Gradient text utility */
+.text-brand-gradient {
+  background: linear-gradient(to right, var(--brand-gradient-start), var(--brand-gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
