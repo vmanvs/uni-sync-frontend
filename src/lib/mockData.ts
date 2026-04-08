@@ -110,13 +110,13 @@ export const libraryBuildings: LibraryBuilding[] = [
 
 // Sitting chart: 7 rows x 8 columns. true = available (black), false = occupied (red)
 export const sittingChartData: boolean[][] = [
-  [true, true, true, true, true, false, true, true],
-  [true, true, true, true, true, false, true, true],
-  [true, true, true, true, true, false, true, true],
-  [true, true, true, true, true, false, true, true],
-  [true, true, true, true, true, false, true, true],
-  [true, true, true, true, true, false, true, true],
-  [true, true, true, true, true, false, true, true],
+  [true, false, true, true, true, true, false, true],
+  [true, true, true, false, true, true, true, true],
+  [false, true, true, true, true, true, true, false],
+  [true, true, false, true, true, false, true, true],
+  [true, true, true, true, false, true, true, true],
+  [true, false, true, true, true, true, true, false],
+  [true, true, true, false, true, true, false, true],
 ];
 
 /* ─── Water Coolers ─── */
