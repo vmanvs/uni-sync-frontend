@@ -1,6 +1,11 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import NavItem from "@/components/ui/NavItem";
+import { mainNavItems, toolNavItems } from "@/lib/navigation";
 
 /* ─── User-specific notifications (bell modal) ─── */
 interface UserNotification {
@@ -82,6 +87,8 @@ interface HeaderProps {
 
 export default function Header({ title = "Overview" }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
   const [notifications, setNotifications] = useState(userNotifications);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -111,17 +118,32 @@ export default function Header({ title = "Overview" }: HeaderProps) {
   };
 
   return (
-    <header className="h-[100px] bg-bg-white border-b border-divider flex items-center justify-between px-10">
-      {/* Page Title */}
-      <h1 className="text-[28px] font-semibold text-text-heading">{title}</h1>
+    <header className="h-[80px] lg:h-[100px] bg-bg-white border-b border-divider flex items-center justify-between px-4 lg:px-10 relative">
+      <div className="flex items-center gap-2 sm:gap-3">
+        {/* Hamburger Menu (Mobile Only) */}
+        <button 
+          className="lg:hidden p-2 -ml-2 text-text-heading rounded-md hover:bg-bg-page transition-colors"
+          onClick={() => setIsMobileMenuOpen(true)}
+          aria-label="Open Mobile Menu"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+        {/* Page Title */}
+        <h1 className="text-[20px] sm:text-[22px] lg:text-[28px] font-semibold text-text-heading truncate max-w-[150px] sm:max-w-none">{title}</h1>
+      </div>
 
       {/* Right side: Bell + Avatar */}
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-3 lg:gap-6">
         {/* Notification Bell */}
         <div className="relative" ref={modalRef}>
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="relative w-[50px] h-[50px] rounded-full flex items-center justify-center cursor-pointer transition-transform duration-150 hover:scale-105"
+            className="relative w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full flex items-center justify-center cursor-pointer transition-transform duration-150 hover:scale-105"
             style={{
               backgroundColor: "var(--notification-bg)",
               boxShadow: "4px 4px 18px -2px rgba(231,228,232,0.8)",
@@ -240,10 +262,53 @@ export default function Header({ title = "Overview" }: HeaderProps) {
         </div>
 
         {/* Profile Avatar */}
-        <div className="w-[50px] h-[50px] rounded-full bg-gray-400 overflow-hidden">
+        <div className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full bg-gray-400 overflow-hidden shrink-0">
           <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-500" />
         </div>
       </div>
+
+      {/* Mobile Drawer Overlay */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[100] lg:hidden flex">
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black/50 transition-opacity"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          
+          {/* Drawer */}
+          <div className="relative w-[280px] max-w-[80%] h-full bg-bg-white flex flex-col overflow-y-auto transform transition-transform duration-300 shadow-2xl">
+            <div className="flex items-center justify-between px-6 py-6 border-b border-divider">
+              <Link href="/" className="flex items-center gap-3" onClick={() => setIsMobileMenuOpen(false)}>
+                <Image src="/icons/uni-sync-icon.svg" alt="UniSync" width={28} height={28} />
+                <span className="text-[20px] font-bold text-brand-gradient">UniSync</span>
+              </Link>
+              <button onClick={() => setIsMobileMenuOpen(false)} className="text-text-muted p-2 hover:bg-bg-page rounded-full transition-colors">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            
+            <nav className="flex flex-col gap-6 px-6 pt-6">
+              {mainNavItems.map((item) => (
+                <div key={item.label} onClick={() => setIsMobileMenuOpen(false)}>
+                  <NavItem icon={item.icon} label={item.label} href={item.href} isActive={pathname === item.href} />
+                </div>
+              ))}
+            </nav>
+            <div className="mx-6 my-6 h-px bg-divider" />
+            <nav className="flex flex-col gap-6 px-6 pb-6">
+              {toolNavItems.map((item) => (
+                <div key={item.label} onClick={() => setIsMobileMenuOpen(false)}>
+                  <NavItem icon={item.icon} label={item.label} href={item.href} isActive={pathname === item.href} />
+                </div>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
 
       <style jsx>{`
         @keyframes notifSlideIn {

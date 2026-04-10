@@ -13,7 +13,7 @@ function CarouselCard({
   card: ResourceCardData;
   isActive: boolean;
 }) {
-  const isFeatured = card.variant === "featured";
+  const isFeatured = isActive;
 
   return (
     <div

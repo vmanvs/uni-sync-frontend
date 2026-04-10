@@ -85,15 +85,15 @@ export default function HealthPage() {
     <div className="flex min-h-screen">
       <Sidebar />
 
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 min-w-0">
         <Header title="Overview" />
 
-        <main className="flex-1 bg-bg-page px-10 py-8 overflow-y-auto">
+        <main className="flex-1 bg-bg-page px-4 pt-6 pb-8 lg:px-10 lg:py-8 overflow-y-auto w-full max-w-full">
           {/* Health Room heading */}
           <SectionLabel>Health Room</SectionLabel>
 
           {/* Summary stat cards */}
-          <div className="flex gap-6 mt-6 mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-6 mb-10">
             <StatCard
               count={availableCount}
               label="Available Now"
@@ -162,7 +162,7 @@ export default function HealthPage() {
 
           <div className="bg-bg-white rounded-[25px] px-[30px] pt-3 pb-6 mt-6">
             {/* Header row */}
-            <div className="grid grid-cols-5 gap-4 py-3 text-text-table-header text-base font-medium">
+            <div className="hidden md:grid grid-cols-5 gap-4 py-3 text-text-table-header text-base font-medium">
               <span>Location</span>
               <span>Doctor Name</span>
               <span>Specialization</span>
@@ -182,21 +182,27 @@ export default function HealthPage() {
                       selectedRow === row.location ? null : row.location
                     )
                   }
-                  className={`grid grid-cols-5 gap-4 py-4 text-text-body text-base -mx-[30px] px-[30px] transition-all duration-200 cursor-pointer ${
+                  className={`flex flex-col gap-2 py-4 md:grid md:grid-cols-5 md:gap-4 md:py-4 text-text-body text-base -mx-4 px-4 lg:-mx-[30px] lg:px-[30px] transition-all duration-200 cursor-pointer ${
                     selectedRow === row.location
                       ? "bg-accent-blue/5"
                       : "hover:bg-bg-page/50"
                   }`}
                 >
-                  <span className="font-medium">{row.location}</span>
-                  <span>{row.doctorName}</span>
-                  <span className="text-text-muted text-sm">
-                    {row.specialization}
-                  </span>
-                  <span>{row.sittingTime}</span>
-                  <span>
-                    <StatusBadge status={row.status} />
-                  </span>
+                  <div className="flex justify-between md:contents"><span className="md:hidden text-sm font-medium text-text-muted">Location</span><span className="font-medium text-right md:text-left">{row.location}</span></div>
+                  <div className="flex justify-between md:contents"><span className="md:hidden text-sm font-medium text-text-muted">Doctor Name</span><span className="text-right md:text-left">{row.doctorName}</span></div>
+                  <div className="flex justify-between md:contents">
+                    <span className="md:hidden text-sm font-medium text-text-muted">Specialization</span>
+                    <span className="text-text-muted text-sm text-right md:text-left">
+                      {row.specialization}
+                    </span>
+                  </div>
+                  <div className="flex justify-between md:contents"><span className="md:hidden text-sm font-medium text-text-muted">Sitting Time</span><span className="text-right md:text-left">{row.sittingTime}</span></div>
+                  <div className="flex justify-between md:contents items-center">
+                    <span className="md:hidden text-sm font-medium text-text-muted">Status</span>
+                    <span>
+                      <StatusBadge status={row.status} />
+                    </span>
+                  </div>
                 </div>
 
                 {/* Expanded detail panel */}
@@ -207,7 +213,7 @@ export default function HealthPage() {
                       animation: "fadeIn 0.2s ease-out",
                     }}
                   >
-                    <div className="flex items-center gap-8 text-sm">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 text-sm">
                       <div className="flex items-center gap-2">
                         <svg
                           width="16"
@@ -248,7 +254,7 @@ export default function HealthPage() {
                         </span>
                       </div>
                       {row.status === "available" && (
-                        <button className="ml-auto px-4 py-1.5 rounded-full bg-accent-blue text-white text-xs font-medium hover:bg-accent-blue/90 transition-colors">
+                        <button className="sm:ml-auto px-4 py-1.5 rounded-full bg-accent-blue text-white text-xs font-medium hover:bg-accent-blue/90 transition-colors w-full sm:w-auto">
                           Book Appointment
                         </button>
                       )}

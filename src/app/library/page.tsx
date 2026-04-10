@@ -108,15 +108,15 @@ export default function LibraryPage() {
     <div className="flex min-h-screen">
       <Sidebar />
 
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 min-w-0">
         <Header title="Overview" />
 
-        <main className="flex-1 bg-bg-page px-10 py-8 overflow-y-auto">
+        <main className="flex-1 bg-bg-page px-4 pt-6 pb-8 lg:px-10 lg:py-8 overflow-y-auto w-full max-w-full">
           {/* Libraries heading */}
           <SectionLabel>Libraries</SectionLabel>
 
           {/* Building cards */}
-          <div className="flex gap-[200px] mt-6 mb-10">
+          <div className="flex gap-4 lg:gap-[200px] flex-wrap justify-between lg:justify-start mt-6 mb-10">
             {libraryBuildings.map((building) => (
               <BuildingCard
                 key={building.id}
@@ -148,7 +148,8 @@ export default function LibraryPage() {
           </div>
 
           {/* Chair grid */}
-          <div className="inline-flex flex-col gap-4">
+          <div className="overflow-x-auto w-full pb-4">
+            <div className="min-w-max flex flex-col gap-4">
             {currentSeats.map((row, rowIdx) => (
               <div key={rowIdx} className="flex gap-[55px]">
                 {row.map((isAvailable, colIdx) => (
@@ -167,6 +168,7 @@ export default function LibraryPage() {
                 ))}
               </div>
             ))}
+          </div>
           </div>
         </main>
       </div>

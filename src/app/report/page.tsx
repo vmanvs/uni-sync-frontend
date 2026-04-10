@@ -99,9 +99,9 @@ export default function ReportPage() {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 min-w-0">
         <Header title="Report an Issue" />
-        <main className="flex-1 bg-bg-page px-10 py-8 overflow-y-auto">
+        <main className="flex-1 bg-bg-page px-4 pt-6 pb-8 lg:px-10 lg:py-8 overflow-y-auto w-full max-w-full">
           {/* Success toast */}
           {submitted && (
             <div
@@ -112,16 +112,16 @@ export default function ReportPage() {
             </div>
           )}
 
-          <div className="grid grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
             {/* Left: Report Form (3 cols) */}
-            <div className="col-span-3">
+            <div className="lg:col-span-3">
               <SectionLabel>Submit New Issue</SectionLabel>
               <div className="bg-bg-white rounded-[25px] p-8 mt-4">
                 {/* Category select */}
                 <label className="block text-sm font-medium text-text-heading mb-2">
                   Category
                 </label>
-                <div className="grid grid-cols-3 gap-3 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
                   {categories.map((cat) => (
                     <button
                       key={cat.value}
@@ -166,7 +166,7 @@ export default function ReportPage() {
                 <label className="block text-sm font-medium text-text-heading mb-2">
                   Priority
                 </label>
-                <div className="flex gap-3 mb-8">
+                <div className="flex flex-wrap gap-3 mb-8">
                   {priorityOptions.map((p) => (
                     <button
                       key={p.value}
@@ -211,7 +211,7 @@ export default function ReportPage() {
             </div>
 
             {/* Right: My Issues (2 cols) */}
-            <div className="col-span-2">
+            <div className="lg:col-span-2">
               <SectionLabel>My Reports</SectionLabel>
               <div className="space-y-4 mt-4">
                 {issues.map((issue) => {

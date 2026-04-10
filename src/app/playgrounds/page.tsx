@@ -191,14 +191,14 @@ export default function PlaygroundsPage() {
     <div className="flex min-h-screen">
       <Sidebar />
 
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 min-w-0">
         <Header title="Overview" />
 
-        <main className="flex-1 bg-bg-page px-10 py-8 overflow-y-auto">
+        <main className="flex-1 bg-bg-page px-4 pt-6 pb-8 lg:px-10 lg:py-8 overflow-y-auto w-full max-w-full">
           <SectionLabel>Play Grounds</SectionLabel>
 
           {/* Summary bar */}
-          <div className="flex gap-4 mt-6 mb-8">
+          <div className="flex flex-wrap gap-3 md:gap-4 mt-6 mb-8">
             {[
               { key: "all" as const, label: "All Grounds", count: groundsData.length, color: "#2D60FF" },
               { key: "free" as const, label: "Free", count: freeCount, color: "#4CAF50" },
@@ -236,7 +236,7 @@ export default function PlaygroundsPage() {
           </div>
 
           {/* Grounds grid */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {filteredGrounds.map((ground) => {
               const isExpanded = selectedGround === ground.id;
               return (

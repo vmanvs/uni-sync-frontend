@@ -80,12 +80,12 @@ export default function AdminPage() {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 min-w-0">
         <Header title="Admin Panel" />
-        <main className="flex-1 bg-bg-page px-10 py-8 overflow-y-auto">
+        <main className="flex-1 bg-bg-page px-4 pt-6 pb-8 lg:px-10 lg:py-8 overflow-y-auto w-full max-w-full">
           {/* Stats row */}
           <SectionLabel>Campus Overview</SectionLabel>
-          <div className="grid grid-cols-4 gap-5 mt-6 mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-6 mb-10">
             {stats.map((stat) => (
               <div
                 key={stat.label}
@@ -111,8 +111,8 @@ export default function AdminPage() {
 
           {/* Resource Health */}
           <SectionLabel>Resource Health</SectionLabel>
-          <div className="bg-bg-white rounded-[25px] px-[30px] pt-3 pb-4 mt-6 mb-10">
-            <div className="grid grid-cols-5 gap-4 py-3 text-text-table-header text-sm font-medium">
+          <div className="bg-bg-white rounded-[25px] px-4 lg:px-[30px] pt-3 pb-4 mt-6 mb-10">
+            <div className="hidden md:grid grid-cols-5 gap-4 py-3 text-text-table-header text-sm font-medium">
               <span>Resource</span>
               <span>Total</span>
               <span>Active</span>
@@ -124,22 +124,25 @@ export default function AdminPage() {
               const health = Math.round((r.active / r.total) * 100);
               return (
                 <div key={r.name}>
-                  <div className="grid grid-cols-5 gap-4 py-3 text-text-body text-sm items-center">
-                    <span className="font-medium">{r.name}</span>
-                    <span>{r.total}</span>
-                    <span className="text-emerald-600 font-medium">{r.active}</span>
-                    <span className={r.issues > 0 ? "text-red-500 font-medium" : ""}>{r.issues}</span>
-                    <div className="flex items-center gap-2">
-                      <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
-                        <div
-                          className="h-full rounded-full transition-all duration-500"
-                          style={{
-                            width: `${health}%`,
-                            background: health > 80 ? "#4CAF50" : health > 50 ? "#FFA726" : "#EF5350",
-                          }}
-                        />
+                  <div className="flex flex-col gap-2 py-4 md:grid md:grid-cols-5 md:gap-4 md:py-3 text-text-body text-sm md:items-center border-b border-divider md:border-b-0 last:border-0 last:pb-0">
+                    <div className="flex justify-between md:contents"><span className="md:hidden text-text-muted">Resource</span><span className="font-medium text-right md:text-left">{r.name}</span></div>
+                    <div className="flex justify-between md:contents"><span className="md:hidden text-text-muted">Total</span><span>{r.total}</span></div>
+                    <div className="flex justify-between md:contents"><span className="md:hidden text-text-muted">Active</span><span className="text-emerald-600 font-medium">{r.active}</span></div>
+                    <div className="flex justify-between md:contents"><span className="md:hidden text-text-muted">Issues</span><span className={r.issues > 0 ? "text-red-500 font-medium" : ""}>{r.issues}</span></div>
+                    <div className="flex flex-col md:contents gap-2">
+                      <span className="md:hidden text-text-muted">Health</span>
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                          <div
+                            className="h-full rounded-full transition-all duration-500"
+                            style={{
+                              width: `${health}%`,
+                              background: health > 80 ? "#4CAF50" : health > 50 ? "#FFA726" : "#EF5350",
+                            }}
+                          />
+                        </div>
+                        <span className="text-xs text-text-muted w-8">{health}%</span>
                       </div>
-                      <span className="text-xs text-text-muted w-8">{health}%</span>
                     </div>
                   </div>
                   {idx < resources.length - 1 && <div className="h-px" style={{ backgroundColor: "#F2F4F7" }} />}
@@ -167,8 +170,8 @@ export default function AdminPage() {
               ))}
             </div>
           </div>
-          <div className="bg-bg-white rounded-[25px] px-[30px] pt-3 pb-4">
-            <div className="grid grid-cols-7 gap-3 py-3 text-text-table-header text-sm font-medium">
+          <div className="bg-bg-white rounded-[25px] px-4 lg:px-[30px] pt-3 pb-4">
+            <div className="hidden md:grid grid-cols-7 gap-3 py-3 text-text-table-header text-sm font-medium">
               <span>ID</span>
               <span className="col-span-2">Issue</span>
               <span>Category</span>
@@ -181,20 +184,21 @@ export default function AdminPage() {
               const sc = statusColors[issue.status];
               return (
                 <div key={issue.id}>
-                  <div className="grid grid-cols-7 gap-3 py-3 text-text-body text-sm items-center hover:bg-bg-page/40 -mx-[30px] px-[30px] transition-colors cursor-default">
-                    <span className="text-text-muted font-mono text-xs">{issue.id}</span>
-                    <span className="col-span-2 flex items-center gap-2">
+                  <div className="flex flex-col gap-2.5 py-4 md:grid md:grid-cols-7 md:gap-3 md:py-3 text-text-body text-sm md:items-center hover:bg-bg-page/40 -mx-4 px-4 lg:-mx-[30px] lg:px-[30px] transition-colors cursor-default border-b border-divider md:border-b-0 last:border-0 last:pb-0">
+                    <div className="flex justify-between md:contents"><span className="md:hidden text-text-muted">ID</span><span className="text-text-muted font-mono text-xs">{issue.id}</span></div>
+                    <div className="flex justify-between md:contents"><span className="md:hidden text-text-muted">Issue</span><span className="md:col-span-2 flex items-center gap-2 text-right md:text-left justify-end md:justify-start">
                       <span className="w-2 h-2 rounded-full shrink-0" style={{ background: priorityColors[issue.priority] }} />
                       {issue.title}
-                    </span>
-                    <span className="text-text-muted">{issue.category}</span>
-                    <span className="text-text-muted">{issue.reporter}</span>
-                    <span className="text-text-muted">{issue.date}</span>
-                    <span>
-                      <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold" style={{ background: sc.bg, color: sc.text }}>
+                    </span></div>
+                    <div className="flex justify-between md:contents"><span className="md:hidden text-text-muted">Category</span><span className="text-text-muted">{issue.category}</span></div>
+                    <div className="flex justify-between md:contents"><span className="md:hidden text-text-muted">Reporter</span><span className="text-text-muted text-right">{issue.reporter}</span></div>
+                    <div className="flex justify-between md:contents"><span className="md:hidden text-text-muted">Date</span><span className="text-text-muted">{issue.date}</span></div>
+                    <div className="flex justify-between md:contents md:items-center">
+                      <span className="md:hidden text-text-muted">Status</span>
+                      <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold flex items-center h-fit justify-center" style={{ background: sc.bg, color: sc.text }}>
                         {issue.status === "in-progress" ? "In Progress" : issue.status.charAt(0).toUpperCase() + issue.status.slice(1)}
                       </span>
-                    </span>
+                    </div>
                   </div>
                   {idx < filteredIssues.length - 1 && <div className="h-px" style={{ backgroundColor: "#F2F4F7" }} />}
                 </div>

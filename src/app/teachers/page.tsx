@@ -86,9 +86,9 @@ export default function TeachersPage() {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 min-w-0">
         <Header title="Teachers Panel" />
-        <main className="flex-1 bg-bg-page px-10 py-8 overflow-y-auto">
+        <main className="flex-1 bg-bg-page px-4 pt-6 pb-8 lg:px-10 lg:py-8 overflow-y-auto w-full max-w-full">
           {/* Profile card */}
           <div
             className="rounded-[25px] px-8 py-6 flex items-center gap-6 mb-10"
@@ -110,7 +110,7 @@ export default function TeachersPage() {
           </div>
 
           {/* Two column layout */}
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left: Slot Management */}
             <div>
               <SectionLabel>Today&apos;s Slots</SectionLabel>

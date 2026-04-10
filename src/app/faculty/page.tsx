@@ -19,10 +19,10 @@ export default function FacultyPage() {
     <div className="flex min-h-screen">
       <Sidebar />
 
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 min-w-0">
         <Header title="Overview" />
 
-        <main className="flex-1 bg-bg-page px-10 py-8 overflow-y-auto">
+        <main className="flex-1 bg-bg-page px-4 pt-6 pb-8 lg:px-10 lg:py-8 overflow-y-auto w-full max-w-full">
           {/* Faculty Details heading */}
           <SectionLabel>Faculty Details</SectionLabel>
 
@@ -71,7 +71,7 @@ export default function FacultyPage() {
           {/* Faculty Table */}
           <div className="bg-bg-white rounded-[25px] px-[30px] pt-3 pb-6">
             {/* Header row */}
-            <div className="grid grid-cols-4 gap-4 py-3 text-text-table-header text-base font-medium">
+            <div className="hidden md:grid grid-cols-4 gap-4 py-3 text-text-table-header text-base font-medium">
               <span>SL No</span>
               <span>Faculty Name</span>
               <span>Available Slots</span>
@@ -85,11 +85,11 @@ export default function FacultyPage() {
             {filteredData.length > 0 ? (
               filteredData.map((row, index) => (
                 <div key={index}>
-                  <div className="grid grid-cols-4 gap-4 py-4 text-text-body text-base group hover:bg-bg-page/50 -mx-[30px] px-[30px] transition-colors duration-150 cursor-default">
-                    <span>{row.slNo}</span>
-                    <span>{row.facultyName}</span>
-                    <span>{row.availableSlots}</span>
-                    <span>{row.duration}</span>
+                  <div className="flex flex-col gap-2 py-4 md:grid md:grid-cols-4 md:gap-4 md:py-4 text-text-body text-base group hover:bg-bg-page/50 -mx-4 px-4 lg:-mx-[30px] lg:px-[30px] transition-colors duration-150 cursor-default">
+                    <div className="flex justify-between md:contents"><span className="md:hidden text-sm font-medium text-text-muted">SL No</span><span className="text-right md:text-left">{row.slNo}</span></div>
+                    <div className="flex justify-between md:contents"><span className="md:hidden text-sm font-medium text-text-muted">Faculty Name</span><span className="text-right md:text-left">{row.facultyName}</span></div>
+                    <div className="flex justify-between md:contents"><span className="md:hidden text-sm font-medium text-text-muted">Available Slots</span><span className="text-right md:text-left">{row.availableSlots}</span></div>
+                    <div className="flex justify-between md:contents"><span className="md:hidden text-sm font-medium text-text-muted">Duration</span><span className="text-right md:text-left">{row.duration}</span></div>
                   </div>
                   {index < filteredData.length - 1 && (
                     <div
